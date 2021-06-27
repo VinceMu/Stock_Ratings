@@ -1,30 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { useCompanySource } from './services/useCompanySource';
+import { useCompanySource, isFetchedState } from './services/useCompanySource';
 import { StockApiService } from './services/httpService';
+import { StockTable } from './components/stock-table';
+import { Header, Icon, Divider } from 'semantic-ui-react'
 
 function App() {
 
   const companySource = useCompanySource(StockApiService, StockApiService);
-  console.log(companySource)
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header as='h1' style={{ padding: '1rem', paddingBottom: 0, color: 'whitesmoke' }}>Company Ratings <Icon name='chart line' /></Header>
+      <Divider />
+      {isFetchedState(companySource) ?
+        <>
+          <div>
+            <StockTable companies={companySource.companies} />
+          </div>
+        </>
+        : <></>}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { CompanyDto } from "../models/companyDto";
 import { CompanyWithPriceClose } from "../models/companyWithPriceClose";
 import { CompanyService, PriceCloseService } from "./httpService";
 
-enum Status {
+export enum Status {
     Fetched = "Fetched", Fetching = "Fetching", Error = "Error", Idle = "Idle"
 }
 
@@ -28,6 +28,10 @@ type State = FetchedState | FetchingState | ErrorState | IdleState;
 
 const initialState: State = {
     status: Status.Idle
+}
+
+export function isFetchedState(state: State): state is FetchedState {
+    return state.status === Status.Fetched;
 }
 
 export function useCompanySource(companyService: CompanyService, priceCloseService: PriceCloseService): State {

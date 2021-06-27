@@ -4,7 +4,7 @@ export interface CompanyDto {
     id: string;
     name: string;
     ticker_symbol: string;
-    exhange_symbol: string;
+    exchange_symbol: string;
     unique_symbol: string;
     date_generated: Date;
     security_name: string;
